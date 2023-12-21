@@ -45,7 +45,7 @@ MIDDLEWARE = [
 ]
 
 # ROOT_URLCONF - корневой URL-адрес проекта
-ROOT_URLCONF = 'djangoProject.urls'
+ROOT_URLCONF = 'djangoShop.urls'
 
 # Темплейтинг (шаблонизация) - работа с шаблонами
 # (файлами html, которые будут отображаться в браузере)
@@ -68,7 +68,7 @@ TEMPLATES = [
 ]
 
 # WSGI_APPLICATION - файл, который будет запускаться при запуске проекта
-WSGI_APPLICATION = 'djangoProject.wsgi.application'
+WSGI_APPLICATION = 'djangoShop.wsgi.application'
 
 
 # DATABASES - настройки базы данных
@@ -102,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # LANGUAGE_CODE - язык проекта
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 # TIME_ZONE - часовой пояс проекта
 TIME_ZONE = 'Asia/Bishkek' # Asia/Bishkek +6

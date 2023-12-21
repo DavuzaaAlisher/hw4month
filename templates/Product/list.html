@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+
+    {% for product in products %}
+
+        <div class="card" style="width: 18rem;">
+            <img src="{{ product.image }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }} {{ product.grade }}</h5>
+                <p class="card-text">{{ product.text }}</p>
+                <p class="card-text">{{ product.created_at}}</p>
+
+                <a href="#" class="btn btn-primary">View detail</a>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+{% endblock %}
