@@ -1,22 +1,15 @@
 """
 settings.py - Файл настроек Django-проекта.
 """
-
 from pathlib import Path
-
 # Корневая директория проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 # Секретный ключ проекта (используется для шифрования данных)
 SECRET_KEY = 'django-insecure-0c0j9-gkxsv-z=g#viu_34ka8vz9xxiux+x9_o386qkn!j)#!^'
-
 # Режим отладки (включен/выключен)
 DEBUG = True
-
 # Список разрешенных хостов для проекта
 ALLOWED_HOSTS = ['*']
-
 # Список приложений, установленных в проекте
 INSTALLED_APPS = [
     # Internal apps
@@ -26,11 +19,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions', # Работа с сессиями
     'django.contrib.messages', # Работа с сообщениями (вывод сообщений пользователю)
     'django.contrib.staticfiles', # Работа со статическими файлами (css, js, img)
-
     # External apps
 
     # My apps
-    'post', # Приложение для работы с постами
+    'product', # Приложение для работы с постами
 ]
 
 # Список промежуточных слоев (middleware) для проекта
@@ -43,10 +35,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 # ROOT_URLCONF - корневой URL-адрес проекта
 ROOT_URLCONF = 'djangoShop.urls'
-
 # Темплейтинг (шаблонизация) - работа с шаблонами
 # (файлами html, которые будут отображаться в браузере)
 TEMPLATES = [
@@ -66,11 +56,8 @@ TEMPLATES = [
         },
     },
 ]
-
 # WSGI_APPLICATION - файл, который будет запускаться при запуске проекта
 WSGI_APPLICATION = 'djangoShop.wsgi.application'
-
-
 # DATABASES - настройки базы данных
 DATABASES = {
     'default': {
@@ -78,8 +65,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3', # Путь к файлу базы данных
     }
 }
-
-
 # AUTH_PASSWORD_VALIDATORS - настройки валидации паролей пользователей
 # UserAttributeSimilarityValidator - проверка на схожесть с именем пользователя
 # MinimumLengthValidator - проверка на минимальную длину пароля
@@ -99,23 +84,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
 # LANGUAGE_CODE - язык проекта
 LANGUAGE_CODE = 'ru-ru'
-
 # TIME_ZONE - часовой пояс проекта
 TIME_ZONE = 'Asia/Bishkek' # Asia/Bishkek +6
-
 # USE_I18N - использование мультиязычности
 USE_I18N = True
-
 # USE_TZ - использование часовых поясов
 USE_TZ = True
-
-
 # STATIC_URL - URL-адрес статических файлов (css, js, img)
 STATIC_URL = 'static/'
-
 # DEFAULT_AUTO_FIELD - тип поля для первичного ключа
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

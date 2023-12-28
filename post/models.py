@@ -29,14 +29,28 @@ class Meta - Мета класс - Это класс, который содер�
 from django.db import models
 
 
+class Meta:
+    abstract = True
+
+
+class Hashtag(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Названия")
+
+
 class Product(models.Model):
     image = models.ImageField(upload_to='posts', null=True, blank=False, verbose_name="Фото")
-    title = models.CharField(max_length=255, verbose_name="Заголовок") # Поле для ввода текста с ограничением в 255 символов
-    text = models.TextField(null=True, blank=True, verbose_name="Текст")# Поле для ввода текста без ограничения
-    grade = models.FloatField(default=0, verbose_name="Оценка") # Поле для ввода числа с плавающей точкой
-    price = models.FloatField(default=0, verbose_name="Цена") # Поле для ввода числа с плавающей точкой
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания") # Поле для ввода даты и времени
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления") # Поле для ввода даты и времени
+    title = models.CharField(max_length=255,
+                             verbose_name="Заголовок")  # Поле для ввода текста с ограничением в 255 символов
+    text = models.TextField(null=True, blank=True, verbose_name="Текст")  # Поле для ввода текста без ограничения
+    grade = models.FloatField(default=0, verbose_name="Оценка")  # Поле для ввода числа с плавающей точкой
+    price = models.FloatField(default=0, verbose_name="Цена")  # Поле для ввода числа с плавающей точкой
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")  # Поле для ввода даты и времени
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")  # Поле для ввода даты и времени
+    hashtags = models.ManyToManyField(
+        Hashtag,
+        verbose_name="Хэштеги",
+        related_name="posts"
+    )
 
     def __str__(self) -> str:
         return f"{self.title} {self.grade}"
@@ -45,3 +59,34 @@ class Product(models.Model):
         db_table = 'product'  # Название таблицы в базе данных (по умолчанию appname_classname (post_post))
         verbose_name = 'Продукт'  # Название модели в единственном числе
         verbose_name_plural = 'Продукты'  # Название модели во множественном числе
+
+
+class Category(models.model):
+    post = models.ForeignKey("post.Post",
+                             on_delete=models.CASCADE,
+                             verbose_name="Пост",
+                             related_name="Category",
+                             )
+    text = models.TextField(null=True, blank=True, verbose_name="Текст")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+
+
+class PostHashtages(models.Model):
+    Post = models.ForeignKey
+    Post,
+    on_delete = models.CASCADE,
+    verbose_name = "Хэштеги",
+    related_name = "posts"
+
+
+date = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+
+# class PostInfo(models.Model):
+#     Post = models.OneToOneField
+#     Post,
+#     on_delete = models.CASCADE,
+#     verbose_name = "Пост",
+#     related_name = "Дизлайки"
+#     likes = models.IntegerField(default=0, verbose_name="Лайки")
+#     dislikes = models.IntegerField(default=0, verbose_name="Дизлайки")

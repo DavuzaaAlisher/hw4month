@@ -33,7 +33,7 @@ objects - менеджер модели. Менеджер модели - это 
 '''
 from django.shortcuts import render
 from django.http import HttpResponse
-from post.models import Product
+from post.models import Product, Category, Hashtag
 
 
 def main_view(request):
@@ -46,7 +46,6 @@ def product_list_view(request):
         # 1 - получить все посты из базы данных
         products = Product.objects.all()  # QuerySet
 
-        # 2 - передать посты в шаблон
         context = {
             'products': products
         }
@@ -55,4 +54,18 @@ def product_list_view(request):
             request,  # запрос от пользователя (объект HttpRequest) параметр обязательный
             'post/list.html',  # имя шаблона (строка) параметр обязательный
             context=context  # словарь с данными (dict) параметр необязательный
+        )
+
+
+def hashtag_list_view(request):
+    if request.method == 'GET':
+        Hashtag = hashatags.objects.all()
+
+        context = {
+            'hashtag': hashtags,
+        }
+
+        return render(
+
+
         )

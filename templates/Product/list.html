@@ -1,23 +1,21 @@
-{% extends 'index.html' %}
-
+Product{% extends 'index.html' %}
 
 {% block content %}
+{% for post in posts %}
 
+    <div class="card" style="width: 18rem;">
+        <img src="{{ post.image }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }} {{ post.rate }}</h5>
+            <p class="card-text">{{ post.text }}</p>
+            <p class="card-text">{{ post.created_at }}</p>
+            {% for hashtag in post.hashtags.all %}
+                <a class="btn btn-primary" href="#">
+                    <p>
+                        #{{ hashtag.name }}
+                    </p>
+                </a>
+            {% endfor %}
 
-    {% for product in products %}
-
-        <div class="card" style="width: 18rem;">
-            <img src="{{ product.image }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.title }} {{ product.grade }}</h5>
-                <p class="card-text">{{ product.text }}</p>
-                <p class="card-text">{{ product.created_at}}</p>
-
-                <a href="#" class="btn btn-primary">View detail</a>
-            </div>
+            <a href="#" class="btn btn-primary">View detail</a>
         </div>
-
-    {% endfor %}
-
-
-{% endblock %}
