@@ -33,7 +33,7 @@ objects - менеджер модели. Менеджер модели - это 
 '''
 from django.shortcuts import render
 from django.http import HttpResponse
-from post.models import Product, Category, Hashtag
+from product.models import Product, Category
 
 
 def main_view(request):
@@ -46,26 +46,49 @@ def product_list_view(request):
         # 1 - получить все посты из базы данных
         products = Product.objects.all()  # QuerySet
 
+        # 2 - передать посты в шаблон
         context = {
             'products': products
         }
 
         return render(
             request,  # запрос от пользователя (объект HttpRequest) параметр обязательный
-            'post/list.html',  # имя шаблона (строка) параметр обязательный
+            'product/list.html',  # имя шаблона (строка) параметр обязательный
             context=context  # словарь с данными (dict) параметр необязательный
         )
 
 
-def hashtag_list_view(request):
+def category_list_view(request):
     if request.method == 'GET':
-        Hashtag = hashatags.objects.all()
+        # 1 - получить все хэштеги из базы данных
+        categories = Category.objects.all()
+
+        # 2 - передать хэштеги в шаблон
+        context = {
+            'categories': categories,
+        }
+
+        # 3 - вернуть ответ с шаблоном и данными
+        return render(
+            request,  # запрос от пользователя (объект HttpRequest) параметр обязательный
+            'category/categories.html.',  # имя шаблона (строка) параметр обязательный
+            context=context  # словарь с данными (dict) параметр необязательный
+        )
+
+
+def product_detail_view(request, product_id):
+    if request.method == 'GET':
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return render(request, '404.html')
 
         context = {
-            'hashtag': hashtags,
+            'product': product,
         }
 
         return render(
-
-
+            request,  # запрос от пользователя (объект HttpRequest) параметр обязательный
+            'product/detail.html',  # имя шаблона (строка) параметр обязательный
+            context=context  # словарь с данными (dict) параметр необязательный
         )
