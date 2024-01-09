@@ -1,21 +1,71 @@
-Product{% extends 'index.html' %}
+<!--
+    extends 'index.html' - это наследование от шаблона index.html
+{#    {% block content %} - это блок, который мы можем расширить в других шаблонах#}
+{#    {% endblock %} - это конец блока#}
+
+    в данном случае мы расширяем шаблон index.html и переопределяем блок content
+    в котором выводим список постов из переменной posts (переданной из контекста в функции posts_list_view)
+
+    В шаблонизаторе можно использовать условные операторы, циклы, фильтры и т.д.
+    https://docs.djangoproject.com/en/3.2/ref/templates/builtins/
+ -->
+
+
+{% extends 'index.html' %}
+
 
 {% block content %}
-{% for post in posts %}
 
-    <div class="card" style="width: 18rem;">
-        <img src="{{ post.image }}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{ post.title }} {{ post.rate }}</h5>
-            <p class="card-text">{{ post.text }}</p>
-            <p class="card-text">{{ post.created_at }}</p>
-            {% for hashtag in post.hashtags.all %}
+<h1>Product List</h1>
+
+<form action="" method="get">
+    <input type="text" name="search" placeholder="Search">
+    <button type="submit">Search</button>
+</form>
+
+
+<a href="?order=date" method="get">
+    By date ASC
+</a>
+
+<a href="?order=-date" method="get">
+    By date DESC
+</a>
+
+<a href="?order=rate" method="get">
+    By rate ASC
+</a>
+
+
+
+
+    {% for product in products %}
+
+        <div class="card" style="width: 18rem;">
+            <img src="/media/{{ product.image }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }} {{ product.grade }}</h5>
+                <p class="card-text">{{ product.text }}</p>
+                <p class="card-text">{{ product.created_at}}</p>
+                {% for category in product.categories.all %}
                 <a class="btn btn-primary" href="#">
                     <p>
-                        #{{ hashtag.name }}
+                        #{{ category.name }}
                     </p>
                 </a>
             {% endfor %}
 
-            <a href="#" class="btn btn-primary">View detail</a>
+                <a href="{{ product.id }}/" class="btn btn-primary">View detail</a>
+            </div>
         </div>
+
+    {% endfor %}
+<div>
+    {% for page in max_page %}
+        <a href="?page={{ page }}" method="get">
+            {{ page }}
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

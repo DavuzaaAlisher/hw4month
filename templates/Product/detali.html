@@ -1,10 +1,18 @@
 {% extends 'index.html' %}
+
 {% block content %}
+
+
 <h1>Product Detail</h1>
+
 <h2>{{ product.title }} {{ product.grade }}</h2>
+
 <p>{{ product.text }}</p>
+
 <img width="100" src="/media/{{ product.image }}">
+
 <p>{{ product.created_at }}</p>
+
 {% for category in product.categories.all %}
     <a class="btn btn-primary" href="#">
         <p>
@@ -13,12 +21,21 @@
     </a>
 {% endfor %}
 
+<a href="update/" class="btn btn-primary">Update</a>
 
 <br>
     {% for review in product.reviews.all %}
         <p>
         {{ review.text }}
-            </div>
+        </p>
+    {% endfor %}
+    <h1></h1>Write Review</h1>
+        <form action="/reviews/create/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <div>
+        <p class="text">{{ review.text }}</p>
+    </div>
         <button type="submit">Сохранить</button>
     </form>
 {% endblock %}
